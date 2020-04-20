@@ -1,12 +1,21 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>
+      <router-link to="/">{{ home }}</router-link>
     </div>
     <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  name: "App",
+  computed: {
+    home() {
+      return this.$t("nav_home");
+    }
+  }
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
