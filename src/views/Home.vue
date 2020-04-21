@@ -2,7 +2,7 @@
   <div class="home">
     {{ message }}
     <Select v-model="lanuage" :options="lanuageList"></Select>
-    <CardCalendar style="margin:10%"></CardCalendar>
+    <CardCalendar style="margin:10%" :lanuage="lanuage"></CardCalendar>
   </div>
 </template>
 
