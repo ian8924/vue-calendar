@@ -43,7 +43,17 @@
             <!-- 日期 -->
             {{ listDate[index].format("DD") }}
           </div>
-          <div v-if="!beforeToday(listDate[index])">5:00</div>
+          <!-- 時間 -->
+          <div v-if="!beforeToday(listDate[index])">
+            <div
+              v-for="item2 in avaiables[listDate[index].format('YYYY-MM-DD')]"
+              :key="item2.index"
+              style="margin-bottom:2px;"
+              :class="{ active: item2.available, noActive: !item2.available }"
+            >
+              {{ item2.date }}
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -64,7 +74,8 @@ export default {
     return {
       changeIndex: 0, //改變周次計數
       daysubtract: 0, //與上週日差幾天
-      listDate: [] //存一週內的日期
+      listDate: [], //存一週內的日期
+      avaiables: {}
     };
   },
   computed: {
@@ -85,13 +96,11 @@ export default {
       this.getLastSunday();
     }
   },
-  created() {
+  async created() {
     this.getLastSunday();
+    this.avaiables = await this.$store.dispatch("getAPI", this.listDate);
   },
   methods: {
-    getDate() {
-      console.log(moment().format("dddd"));
-    },
     getLastSunday() {
       let locale = this.$i18n.locale === "tw" ? "zh-tw" : "";
       moment.locale(locale);
@@ -196,5 +205,12 @@ h3 {
 
 .date-style {
   margin: 10px 0 10px 0;
+}
+.active {
+  color: #02cab9;
+}
+
+.noActive {
+  color: #c4caca;
 }
 </style>
