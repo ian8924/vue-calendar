@@ -22,7 +22,7 @@
           </el-button>
         </el-button-group>
         <!-- 日期期間 -->
-        <div style="margin-top:10px">
+        <div style="margin-top:10px" class="h5-front">
           {{ listDate[0].format("YYYY/MM/DD") }} -
           {{ listDate[6].format("YYYY/MM/DD") }}
         </div>
@@ -43,7 +43,7 @@
             <!-- 日期 -->
             {{ listDate[index].format("DD") }}
           </div>
-          <div>5:00</div>
+          <div v-if="!beforeToday(listDate[index])">5:00</div>
         </li>
       </ul>
     </div>
@@ -64,7 +64,7 @@ export default {
     return {
       changeIndex: 0, //改變周次計數
       daysubtract: 0, //與上週日差幾天
-      listDate: []
+      listDate: [] //存一週內的日期
     };
   },
   computed: {
@@ -115,9 +115,13 @@ export default {
       this.daysubtract = daysubtract;
       // listDate存一週內的日期
       for (let i = 0; i <= 6; i++) {
-        this.listDate[i] = moment()
-          .subtract(this.daysubtract, "days")
-          .add(i, "days");
+        this.$set(
+          this.listDate,
+          i,
+          moment()
+            .subtract(this.daysubtract, "days")
+            .add(i, "days")
+        );
       }
     },
     changeWeek(val) {
@@ -152,15 +156,15 @@ export default {
 h3 {
   color: #02cab9;
 }
-h5-front {
+.h5-front {
   display: block;
-  font-size: 0.83em;
+  font-size: 14px;
   font-weight: bold;
 }
 .box-card {
   justify-items: center;
   width: 60%;
-  min-width: 600px;
+  min-width: 400px;
 }
 
 .box-card-ul {

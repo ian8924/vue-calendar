@@ -30,6 +30,7 @@ export default {
     }
   },
   watch: {
+    // 切換語言
     lanuage(val) {
       this.$i18n.locale = val;
     }
