@@ -73,9 +73,9 @@ export default {
   data() {
     return {
       changeIndex: 0, //改變周次計數
-      daysubtract: 0, //與上週日差幾天
+      daySubtract: 0, //與當週日差幾天
       listDate: [], //存一週內的日期
-      avaiables: {}
+      avaiables: {} //  { "2020-04-19" : [ {date:"5:30",available:true} ] }
     };
   },
   computed: {
@@ -101,38 +101,40 @@ export default {
     this.avaiables = await this.$store.dispatch("getAPI", this.listDate);
   },
   methods: {
+    // 取得當週禮拜天日期 ＆ 設定當週日期
     getLastSunday() {
       let locale = this.$i18n.locale === "tw" ? "zh-tw" : "";
       moment.locale(locale);
       let day = moment().format("dd");
-      let daysubtract = 0;
+      let daySubtract = 0;
       if (day === "Mo" || day === "一") {
-        daysubtract = 1;
+        daySubtract = 1;
       } else if (day === "Tu" || day === "二") {
-        daysubtract = 2;
+        daySubtract = 2;
       } else if (day === "We" || day === "三") {
-        daysubtract = 3;
+        daySubtract = 3;
       } else if (day === "Th" || day === "四") {
-        daysubtract = 4;
+        daySubtract = 4;
       } else if (day === "Fr" || day === "五") {
-        daysubtract = 5;
+        daySubtract = 5;
       } else if (day === "Sa" || day === "六") {
-        daysubtract = 6;
+        daySubtract = 6;
       } else if (day === "Su" || day === "日") {
-        daysubtract = 7;
+        daySubtract = 7;
       }
-      this.daysubtract = daysubtract;
+      this.daySubtract = daySubtract;
       // listDate存一週內的日期
       for (let i = 0; i <= 6; i++) {
         this.$set(
           this.listDate,
           i,
           moment()
-            .subtract(this.daysubtract, "days")
+            .subtract(this.daySubtract, "days")
             .add(i, "days")
         );
       }
     },
+    // 改變周次
     changeWeek(val) {
       if (val === "pre") {
         this.changeIndex--;
@@ -144,13 +146,14 @@ export default {
           this.listDate,
           i,
           moment()
-            .subtract(this.daysubtract, "days")
+            .subtract(this.daySubtract, "days")
             .add(i + 7 * this.changeIndex, "days")
         );
         // 切換後打API
         // this.avaiables = this.$store.dispatch("getAPI", this.listDate);
       }
     },
+    // 當天日期判斷
     beforeToday(val) {
       // 今天以前都是true
       let select = val.valueOf();

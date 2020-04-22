@@ -15,13 +15,14 @@ export default {
   components: { Select, CardCalendar },
   data() {
     return {
-      lanuage: "tw"
+      lanuage: "tw" // 初始語言
     };
   },
   computed: {
     message() {
       return this.$t("message");
     },
+    // 可選語言
     lanuageList() {
       return [
         { label: "中文", value: "tw" },
