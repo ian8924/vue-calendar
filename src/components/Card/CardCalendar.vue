@@ -22,14 +22,14 @@
           </el-button>
         </el-button-group>
         <!-- 日期期間 -->
-        <div style="margin-top:10px" class="h5-front">
-          {{ listDate[0].format("YYYY/MM/DD") }} -
-          {{ listDate[6].format("YYYY/MM/DD") }}
-        </div>
       </div>
-      <!-- 當前時區標準時間 -->
-      <div class="h5-front">*時間以 {{ timeZone }} 顯示</div>
     </div>
+    <div style="margin-top:10px" class="h5-front">
+      {{ listDate[0].format("YYYY/MM/DD") }} -
+      {{ listDate[6].format("YYYY/MM/DD") }}
+    </div>
+    <!-- 當前時區標準時間 -->
+    <div class="h5-front">*時間以 {{ timeZone }} 顯示</div>
     <div style="width:90%">
       <ul class="box-card-ul">
         <li
@@ -147,6 +147,8 @@ export default {
             .subtract(this.daysubtract, "days")
             .add(i + 7 * this.changeIndex, "days")
         );
+        // 切換後打API
+        // this.avaiables = this.$store.dispatch("getAPI", this.listDate);
       }
     },
     beforeToday(val) {
@@ -161,56 +163,4 @@ export default {
 };
 </script>
 
-<style>
-h3 {
-  color: #02cab9;
-}
-.h5-front {
-  display: block;
-  font-size: 14px;
-  font-weight: bold;
-}
-.box-card {
-  justify-items: center;
-  width: 60%;
-  min-width: 400px;
-}
-
-.box-card-ul {
-  display: flex;
-  font-weight: 700;
-  justify-content: space-between;
-}
-
-.box-card-ul li {
-  width: 12%;
-  margin: 3px;
-  padding-top: 20px;
-  list-style: none;
-  border-top: #02cab9 4px solid;
-}
-
-.box-card .disable {
-  width: 12%;
-  margin: 3px;
-  padding-top: 20px;
-  list-style: none;
-  color: #c4caca;
-  border-top: #c4caca 4px solid !important;
-}
-
-.timelist-li {
-  list-style: none;
-}
-
-.date-style {
-  margin: 10px 0 10px 0;
-}
-.active {
-  color: #02cab9;
-}
-
-.noActive {
-  color: #c4caca;
-}
-</style>
+<style></style>

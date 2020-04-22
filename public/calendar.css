@@ -1,0 +1,61 @@
+h3 {
+  color: #02cab9;
+}
+.h5-front {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+}
+.box-card {
+  margin: 20px auto;
+  width: 60%;
+  min-width: 400px;
+}
+
+.box-card-ul {
+  display: flex;
+  font-weight: 700;
+  justify-content: space-between;
+}
+
+.box-card-ul li {
+  width: 12%;
+  margin: 3px;
+  padding-top: 20px;
+  list-style: none;
+  border-top: #02cab9 4px solid;
+}
+
+.box-card .disable {
+  width: 12%;
+  margin: 3px;
+  padding-top: 20px;
+  list-style: none;
+  color: #c4caca;
+  border-top: #c4caca 4px solid !important;
+}
+
+.timelist-li {
+  list-style: none;
+}
+
+.date-style {
+  margin: 10px 0 10px 0;
+}
+.active {
+  font-size: 14px;
+  color: #02cab9;
+}
+
+.noActive {
+  font-size: 14px;
+  color: #c4caca;
+}
+
+@media (max-width: 600px) {
+  .h5-front {
+    display: block;
+    font-size: 8px;
+    font-weight: bold;
+  }
+}
